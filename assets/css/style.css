@@ -853,6 +853,12 @@ section {
 /*    padding-bottom: 130px;*/
 }
 
+@media (max-width: 800px) {
+    .contact .info {
+        flex-direction: column;
+    }
+}
+
 .contact .info {
     padding: 30px;
     background: #fff;
