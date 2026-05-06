@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const blogPosts = [
+  { title: "Getting Started with Spring Boot 3", excerpt: "Learn the fundamentals of Spring Boot 3 and how to create your first REST API.", date: "January 15, 2024", readTime: "5 min read", category: "Java" },
+  { title: "Understanding Kafka Streams", excerpt: "A deep dive into Kafka Streams for real-time data processing applications.", date: "December 20, 2023", readTime: "8 min read", category: "Kafka" },
+  { title: "Clean Code Principles for Java Developers", excerpt: "Best practices for writing maintainable and readable Java code.", date: "November 10, 2023", readTime: "6 min read", category: "Best Practices" },
+  { title: "AWS Lambda Best Practices", excerpt: "Tips and tricks for building efficient serverless applications on AWS.", date: "October 5, 2023", readTime: "7 min read", category: "AWS" }
+];
+---
+
+<BaseLayout title="Blog | codewithnaman">
+  <Header />
+  <main class="blog-page">
+    <section class="page-header">
+      <div class="container">
+        <h1><span class="accent">//</span> Blog</h1>
+        <p>Thoughts on software development, technology, and best practices.</p>
+      </div>
+    </section>
+    <section class="blog-section">
+      <div class="container">
+        <div class="blog-grid">
+          {blogPosts.map(post => (
+            <article class="blog-card glass-card">
+              <div class="blog-content">
+                <div class="blog-meta"><span class="category">{post.category}</span><span class="read-time">{post.readTime}</span></div>
+                <h3>{post.title}</h3>
+                <p>{post.excerpt}</p>
+                <div class="blog-footer"><span class="date">{post.date}</span><span class="read-more">Read more →</span></div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .blog-page { padding-top: 100px; }
+  .page-header { padding: 4rem 0; border-bottom: 1px solid var(--border-glass); }
+  .page-header h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .page-header .accent { font-family: var(--font-mono); color: var(--accent-green); }
+  .page-header p { color: var(--text-secondary); }
+  .blog-section { padding: 3rem 0; }
+  .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+  .blog-card { padding: 1.5rem; cursor: pointer; }
+  .blog-card:hover { border-color: var(--accent-green); transform: translateY(-2px); }
+  .blog-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+  .category { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent-green); }
+  .read-time { font-size: 0.75rem; color: var(--text-muted); }
+  .blog-card h3 { font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem; line-height: 1.4; }
+  .blog-card p { color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-bottom: 1.25rem; }
+  .blog-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--border-glass); }
+  .date { font-size: 0.8125rem; color: var(--text-muted); }
+  .read-more { font-size: 0.8125rem; color: var(--accent-green); font-weight: 500; }
+</style>

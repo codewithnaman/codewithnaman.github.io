@@ -1,0 +1,70 @@
+---
+---
+
+<section id="about" class="about">
+  <div class="container">
+    <div class="section-title">
+      <h2>💡 About Me</h2>
+    </div>
+    <div class="about-content">
+      <div class="about-text glass-card">
+        <p>
+          I'm a software engineer with over <strong>9+ years</strong> of experience in the industry,
+          working across diverse domains including retail, telecom, healthcare, and Fintech.
+        </p>
+        <p>
+          My technical expertise revolves around <strong>Java, Spring Framework, Kafka, and AWS Cloud</strong>.
+          I strongly believe in the power of clean code — code that is not only easier for humans to
+          understand and maintain but also helps reduce errors and improve overall quality.
+        </p>
+        <p>
+          I'm a firm believer in Martin Fowler's philosophy: <em>"Any fool can write code that a computer can understand.
+          Good programmers write code that humans can understand."</em> I strive to write well-structured,
+          readable, and maintainable code.
+        </p>
+        <p>
+          Beyond coding, I'm passionate about knowledge sharing. I enjoy mentoring freshers and college
+          undergraduates, helping them navigate the exciting world of software development.
+        </p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card glass-card">
+          <span class="stat-icon">⏱️</span>
+          <span class="stat-number">9+</span>
+          <span class="stat-label">Years Experience</span>
+        </div>
+        <div class="stat-card glass-card">
+          <span class="stat-icon">🚀</span>
+          <span class="stat-number">15+</span>
+          <span class="stat-label">Projects Delivered</span>
+        </div>
+        <div class="stat-card glass-card">
+          <span class="stat-icon">👥</span>
+          <span class="stat-number">50+</span>
+          <span class="stat-label">Mentees</span>
+        </div>
+        <div class="stat-card glass-card">
+          <span class="stat-icon">🏢</span>
+          <span class="stat-number">8+</span>
+          <span class="stat-label">Companies</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about { border-left: 3px solid var(--accent-green); }
+  .about-content { display: grid; grid-template-columns: 1.5fr 1fr; gap: 2rem; align-items: start; }
+  .about-text { padding: 2rem; }
+  .about-text p { color: var(--text-secondary); margin-bottom: 1.25rem; line-height: 1.75; }
+  .about-text strong { color: var(--accent-green); font-weight: 600; }
+  .about-text em { color: var(--accent-blue); font-style: normal; }
+  .about-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .stat-card { padding: 1.25rem; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 0.25rem; }
+  .stat-icon { font-size: 1.5rem; margin-bottom: 0.25rem; }
+  .stat-number { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, var(--accent-green), var(--accent-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  @media (max-width: 900px) { .about-content { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) { .about-stats { grid-template-columns: 1fr; } }
+</style>
