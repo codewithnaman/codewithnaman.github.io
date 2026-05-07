@@ -298,6 +298,3 @@ section {
 #skills { padding: 5rem 0; }
 #experience { padding: 5rem 0; background: var(--bg-secondary); }
 #contact { padding: 5rem 0; }
-
-/* Footer links fix */
-.footer-links a:first-child { display: none; }
