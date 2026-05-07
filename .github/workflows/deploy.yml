@@ -6,18 +6,10 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    concurrency:
-      group: "pages"
-      cancel-in-progress: false
+      contents: write
 
     steps:
       - name: Checkout
@@ -35,14 +27,18 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: ./dist
+      - name: Verify build output
+        run: |
+          echo "=== Dist contents ==="
+          ls -la dist/
+          echo "=== Sitemap ==="
+          head -5 dist/sitemap.xml
+          echo "=== Robots ==="
+          cat dist/robots.txt
 
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          keep_files: false
