@@ -7,6 +7,28 @@
       <h2>💡 About Me</h2>
     </div>
     <div class="about-content">
+      <div class="about-stats">
+        <div class="stat-card glass-card">
+          <span class="stat-icon">⏱️</span>
+          <span class="stat-number" data-target="11">0</span>
+          <span class="stat-label">Years of Experience</span>
+        </div>
+        <div class="stat-card glass-card">
+          <span class="stat-icon">💳</span>
+          <span class="stat-number" data-target="8">0</span>
+          <span class="stat-label">Years in FinTech</span>
+        </div>
+        <div class="stat-card glass-card">
+          <span class="stat-icon">👥</span>
+          <span class="stat-number" data-target="50">0</span>
+          <span class="stat-label">Engineers Mentored</span>
+        </div>
+        <div class="stat-card glass-card">
+          <span class="stat-icon">🚀</span>
+          <span class="stat-number" data-target="15">0</span>
+          <span class="stat-label">Projects Delivered</span>
+        </div>
+      </div>
       <div class="about-text glass-card">
         <p>
           I'm a Software Engineering Manager with <strong>11+ years</strong> of experience — including <strong>8+ years in FinTech</strong> — building systems that handle authentication, payments, and financial transactions at global scale. Currently at <strong>Mastercard</strong>, I lead engineering on Core Payment Authentication, working deep inside the 3DS protocol stack that millions of cardholders rely on every day.
@@ -18,50 +40,84 @@
           Today, my focus sits at the intersection of engineering leadership and applied AI. I lead teams through architectural decisions and own end-to-end feature delivery, while actively championing AI adoption — running production POCs on AI agents, RAG pipelines, LoRA fine-tuning, and agent-to-agent interactions. I believe the next generation of payment infrastructure will be built by engineers who move fluently between distributed systems and AI-native design.
         </p>
         <p>
-          <em>"Any fool can write code that a computer can understand. Good programmers write code that humans can understand." — Martin Fowler</em>
+          <em>"I build payment systems that work silently at scale — and teams that do the same."</em>
         </p>
         <p>
-          Beyond the code, I invest in the craft itself: mentoring engineers through design reviews, raising team technical standards, and translating product complexity into scalable designs. I've guided <strong>50+ developers</strong> and believe that the highest-leverage thing a senior engineer can do is make everyone around them better.
+          Beyond the code, I invest in the craft itself: mentoring engineers through design reviews, raising team technical standards, and translating product complexity into scalable designs. I've mentored <strong>50+ engineers</strong> across structured design reviews, 1:1 coaching, and cross-team architecture forums — helping them grow from individual contributors to owners of complex systems.
         </p>
-      </div>
-      <div class="about-stats">
-        <div class="stat-card glass-card">
-          <span class="stat-icon">⏱️</span>
-          <span class="stat-number">11+</span>
-          <span class="stat-label">Years of Experience</span>
-        </div>
-        <div class="stat-card glass-card">
-          <span class="stat-icon">💳</span>
-          <span class="stat-number">8+</span>
-          <span class="stat-label">Years in FinTech</span>
-        </div>
-        <div class="stat-card glass-card">
-          <span class="stat-icon">👥</span>
-          <span class="stat-number">50+</span>
-          <span class="stat-label">Engineers Mentored</span>
-        </div>
-        <div class="stat-card glass-card">
-          <span class="stat-icon">🚀</span>
-          <span class="stat-number">15+</span>
-          <span class="stat-label">Projects Delivered</span>
-        </div>
       </div>
     </div>
   </div>
 </section>
 
+<script>
+  const animateCounters = () => {
+    const statsSection = document.querySelector('.about-stats');
+    if (!statsSection || statsSection.dataset.animated) return;
+    
+    const counters = statsSection.querySelectorAll('.stat-number');
+    counters.forEach(counter => {
+      const target = parseInt(counter.getAttribute('data-target'));
+      const duration = 1500;
+      const startTime = performance.now();
+      
+      const updateCounter = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(easeOut * target);
+        
+        counter.textContent = current + '+';
+        
+        if (progress < 1) {
+          requestAnimationFrame(updateCounter);
+        }
+      };
+      
+      requestAnimationFrame(updateCounter);
+    });
+    
+    statsSection.dataset.animated = 'true';
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounters();
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  
+  const statsSection = document.querySelector('.about-stats');
+  if (statsSection) {
+    observer.observe(statsSection);
+  }
+</script>
+
 <style>
-  .about { border-left: 3px solid var(--accent-green); }
-  .about-content { display: grid; grid-template-columns: 1.5fr 1fr; gap: 2rem; align-items: start; }
+  .about { border-left: 3px solid var(--accent-rose); }
+  .about-content { display: flex; flex-direction: column; gap: 2rem; }
   .about-text { padding: 2rem; }
   .about-text p { color: var(--text-secondary); margin-bottom: 1.25rem; line-height: 1.75; }
-  .about-text strong { color: var(--accent-green); font-weight: 600; }
-  .about-text em { color: var(--accent-blue); font-style: normal; }
-  .about-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .about-text strong { color: var(--accent-rose); font-weight: 600; }
+  .about-text em { color: var(--accent-rose); font-style: normal; }
+  .about-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
   .stat-card { padding: 1.25rem; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 0.25rem; }
   .stat-icon { font-size: 1.5rem; margin-bottom: 0.25rem; }
-  .stat-number { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, var(--accent-green), var(--accent-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .stat-number { 
+    font-size: 2rem; 
+    font-weight: 800; 
+    background: linear-gradient(135deg, var(--accent-rose), #fb7185); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    background-clip: text; 
+  }
   .stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
-  @media (max-width: 900px) { .about-content { grid-template-columns: 1fr; } }
-  @media (max-width: 480px) { .about-stats { grid-template-columns: 1fr; } }
+  @media (max-width: 768px) {
+    .about-stats { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .about-stats { grid-template-columns: 1fr; }
+  }
 </style>

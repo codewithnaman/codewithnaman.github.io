@@ -4,7 +4,8 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "Lead Software Engineer with 11+ years experience in FinTech. Building scalable systems with Java, Spring, Kafka & Cloud. AI enthusiast and engineering leader." } = Astro.props;
+const { title, description = "Engineering Manager at Mastercard with 11+ years in FinTech. Building scalable payment authentication systems with Java, Kafka, AWS. AI adopter and team multiplier." } = Astro.props;
+const canonicalUrl = Astro.url.pathname === '/index.html' ? 'https://codewithnaman.com/' : `https://codewithnaman.com${Astro.url.pathname}`;
 ---
 
 <!doctype html>
@@ -18,8 +19,8 @@ const { title, description = "Lead Software Engineer with 11+ years experience i
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={`https://codewithnaman.com${Astro.url.pathname}`} />
-    <meta property="og:image" content="https://codewithnaman.com/assets/img/profile-img.jpg" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content="https://codewithnaman.com/assets/img/cwn-logo.png" />
     <meta property="og:site_name" content="codewithnaman" />
     <meta property="og:locale" content="en_US" />
     
@@ -27,13 +28,14 @@ const { title, description = "Lead Software Engineer with 11+ years experience i
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="https://codewithnaman.com/assets/img/profile-img.jpg" />
+    <meta name="twitter:image" content="https://codewithnaman.com/assets/img/cwn-logo.png" />
     <meta name="twitter:creator" content="@codewithnaman" />
     
     <!-- Canonical URL -->
-    <link rel="canonical" href={`https://codewithnaman.com${Astro.url.pathname}`} />
+    <link rel="canonical" href={canonicalUrl} />
     
-    <link rel="icon" type="image/svg+xml" href="/assets/img/favicon-32x32.png" />
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon-32x32.ico" />
+    <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
     <title>{title}</title>
     
     <!-- Structured Data (JSON-LD) -->
@@ -42,20 +44,17 @@ const { title, description = "Lead Software Engineer with 11+ years experience i
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Naman Gupta",
+        "jobTitle": "Manager, Software Engineering",
+        "worksFor": { "@type": "Organization", "name": "Mastercard" },
         "url": "https://codewithnaman.com",
-        "image": "https://codewithnaman.com/assets/img/profile-img.jpg",
-        "jobTitle": "Lead Software Engineer",
-        "worksFor": {
-          "@type": "Organization",
-          "name": "Mastercard"
-        },
+        "image": "https://codewithnaman.com/assets/img/cwn-logo.png",
         "sameAs": [
-          "https://www.linkedin.com/in/codewithnaman",
-          "https://twitter.com/codewithnaman",
-          "https://github.com/codewithnaman"
+          "https://linkedin.com/in/codewithnaman",
+          "https://github.com/codewithnaman",
+          "https://twitter.com/codewithnaman"
         ],
-        "description": "Lead Software Engineer with 11+ years in FinTech. AI enthusiast and engineering leader.",
-        "knowsAbout": ["Java", "Spring Framework", "Kafka", "AWS Cloud", "AI", "Microservices"]
+        "description": "Engineering Manager at Mastercard with 11+ years in FinTech. Building scalable payment authentication systems with Java, Kafka, AWS. AI adopter and team multiplier.",
+        "knowsAbout": ["Java", "Spring Framework", "Kafka", "AWS", "AI", "Microservices", "Payment Authentication", "3DS", "System Design", "Engineering Leadership"]
       }
     </script>
   </head>

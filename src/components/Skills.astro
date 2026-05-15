@@ -1,10 +1,10 @@
 ---
 const skills = [
   { category: "Backend", items: ["Java", "Spring Boot", "Spring Core", "Spring Cloud", "REST APIs", "Microservices"], color: "blue" },
-  { category: "Data", items: ["Kafka", "SQL", "NoSQL", "MongoDB", "PostgreSQL", "Redis"], color: "green" },
-  { category: "Cloud & DevOps", items: ["AWS", "EC2", "S3", "Lambda", "Docker", "Kubernetes"], color: "amber" },
-  { category: "Leadership & Management", items: ["Technical Leadership", "Team Mentoring", "Architecture Design", "CI/CD Pipelines", "Code Reviews", "Project Mgmt"], color: "teal" },
   { category: "AI & Machine Learning", items: ["AI Agents", "RAG Pipelines", "LLM Integration", "Prompt Engineering", "LoRA Fine-tuning", "Agent-to-Agent"], color: "rose" },
+  { category: "Data", items: ["Kafka", "SQL", "NoSQL", "MongoDB", "PostgreSQL", "Redis"], color: "green" },
+  { category: "Cloud & DevOps", items: ["AWS", "EC2", "S3", "Lambda", "Docker"], color: "amber" },
+  { category: "Leadership & Management", items: ["Technical Leadership", "Team Mentoring", "Architecture Design", "CI/CD Pipelines", "Code Reviews", "Project Mgmt"], color: "teal" },
   { category: "Frontend", items: ["Angular", "React", "HTML/CSS", "TypeScript"], color: "purple" },
 ];
 ---
@@ -17,9 +17,15 @@ const skills = [
     </div>
     <div class="bento-grid">
       {skills.map((skillCategory, index) => (
-        <div class={`bento-card bento-${skillCategory.color}`} data-size={index === 0 ? 'large' : 'medium'}>
+        <div class={`bento-card bento-${skillCategory.color}`} data-size={index === 0 || index === 1 ? 'large' : 'medium'}>
           <div class="bento-header">
-            <span class="bento-icon">{index === 0 ? '⚙️' : index === 1 ? '💾' : index === 2 ? '☁️' : index === 3 ? '👔' : index === 4 ? '🤖' : '🎨'}</span>
+            <span class="bento-icon">
+              {skillCategory.category === 'Backend' ? '⚙️' : 
+               skillCategory.category === 'AI & Machine Learning' ? '🤖' : 
+               skillCategory.category === 'Data' ? '💾' : 
+               skillCategory.category === 'Cloud & DevOps' ? '☁️' : 
+               skillCategory.category === 'Leadership & Management' ? '👔' : '🎨'}
+            </span>
             <h3>{skillCategory.category}</h3>
           </div>
           <div class="bento-tags">
@@ -34,7 +40,7 @@ const skills = [
 </section>
 
 <style>
-  .skills { border-left: 3px solid var(--accent-blue); }
+  .skills { border-left: 3px solid var(--accent-green); }
   .bento-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -49,6 +55,24 @@ const skills = [
     transition: all 0.3s ease;
   }
   .bento-card:hover { transform: translateY(-4px); }
+  .bento-card[data-size="large"] {
+    padding: 2rem;
+    border-width: 2px;
+    transform: scale(1.02);
+  }
+  .bento-card[data-size="large"]:hover {
+    transform: translateY(-4px) scale(1.02);
+  }
+  .bento-card[data-size="large"] .bento-header h3 {
+    font-size: 1.25rem;
+  }
+  .bento-card[data-size="large"] .bento-icon {
+    font-size: 2rem;
+  }
+  .bento-card[data-size="large"] .bento-tag {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
   .bento-blue { background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05)); border: 1px solid rgba(59, 130, 246, 0.3); }
   .bento-blue:hover { box-shadow: 0 8px 30px rgba(59, 130, 246, 0.2); border-color: rgba(59, 130, 246, 0.5); }
   .bento-green { background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.05)); border: 1px solid rgba(34, 197, 94, 0.3); }
@@ -61,6 +85,10 @@ const skills = [
   .bento-teal:hover { box-shadow: 0 8px 30px rgba(20, 184, 166, 0.2); border-color: rgba(20, 184, 166, 0.5); }
   .bento-rose { background: linear-gradient(135deg, rgba(244, 63, 94, 0.15), rgba(244, 63, 94, 0.05)); border: 1px solid rgba(244, 63, 94, 0.3); }
   .bento-rose:hover { box-shadow: 0 8px 30px rgba(244, 63, 94, 0.2); border-color: rgba(244, 63, 94, 0.5); }
+  .bento-blue.bento-card[data-size="large"] { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), 0 8px 30px rgba(0, 0, 0, 0.4); }
+  .bento-blue.bento-card[data-size="large"]:hover { box-shadow: 0 0 30px rgba(59, 130, 246, 0.5), 0 12px 40px rgba(0, 0, 0, 0.5); }
+  .bento-rose.bento-card[data-size="large"] { box-shadow: 0 0 20px rgba(244, 63, 94, 0.3), 0 8px 30px rgba(0, 0, 0, 0.4); }
+  .bento-rose.bento-card[data-size="large"]:hover { box-shadow: 0 0 30px rgba(244, 63, 94, 0.5), 0 12px 40px rgba(0, 0, 0, 0.5); }
   .bento-header { display: flex; align-items: center; gap: 0.75rem; }
   .bento-icon { font-size: 1.5rem; }
   .bento-header h3 { font-size: 1.125rem; font-weight: 600; color: var(--text-primary); }
