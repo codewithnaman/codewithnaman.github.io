@@ -15,12 +15,28 @@ const canonicalUrl = Astro.url.pathname === '/index.html' ? 'https://codewithnam
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     
+    <!-- SEO Meta Tags -->
+    <meta name="author" content="Naman Gupta" />
+    <meta name="keywords" content="Engineering Manager, FinTech, Java, Spring, Kafka, AWS, AI, Payment Systems, 3DS, Microservices, System Design, Pune, India" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f5f5f5" media="(prefers-color-scheme: light)" />
+    
+    <!-- Font Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+    
     <!-- Open Graph (Facebook, LinkedIn) -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content="https://codewithnaman.com/assets/img/cwn-logo.png" />
+    <meta property="og:image:width" content="400" />
+    <meta property="og:image:height" content="400" />
     <meta property="og:site_name" content="codewithnaman" />
     <meta property="og:locale" content="en_US" />
     
@@ -30,6 +46,7 @@ const canonicalUrl = Astro.url.pathname === '/index.html' ? 'https://codewithnam
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content="https://codewithnaman.com/assets/img/cwn-logo.png" />
     <meta name="twitter:creator" content="@codewithnaman" />
+    <meta name="twitter:site" content="@codewithnaman" />
     
     <!-- Canonical URL -->
     <link rel="canonical" href={canonicalUrl} />
@@ -42,25 +59,42 @@ const canonicalUrl = Astro.url.pathname === '/index.html' ? 'https://codewithnam
     <script type="application/ld+json" is:inline>
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Naman Gupta",
-        "jobTitle": "Manager, Software Engineering",
-        "worksFor": { "@type": "Organization", "name": "Mastercard" },
-        "url": "https://codewithnaman.com",
-        "image": "https://codewithnaman.com/assets/img/cwn-logo.png",
-        "sameAs": [
-          "https://linkedin.com/in/codewithnaman",
-          "https://github.com/codewithnaman",
-          "https://twitter.com/codewithnaman"
-        ],
-        "description": "Engineering Manager at Mastercard with 11+ years in FinTech. Building scalable payment authentication systems with Java, Kafka, AWS. AI adopter and team multiplier.",
-        "knowsAbout": ["Java", "Spring Framework", "Kafka", "AWS", "AI", "Microservices", "Payment Authentication", "3DS", "System Design", "Engineering Leadership"]
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://codewithnaman.com/#website",
+            "url": "https://codewithnaman.com",
+            "name": "codewithnaman",
+            "description": "Engineering Manager at Mastercard with 11+ years in FinTech. Building scalable payment authentication systems with Java, Kafka, AWS. AI adopter and team multiplier.",
+            "publisher": { "@id": "https://codewithnaman.com/#person" }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://codewithnaman.com/#person",
+            "name": "Naman Gupta",
+            "jobTitle": "Manager, Software Engineering",
+            "worksFor": { "@type": "Organization", "name": "Mastercard" },
+            "url": "https://codewithnaman.com",
+            "image": "https://codewithnaman.com/assets/img/cwn-logo.png",
+            "email": "contact@codewithnaman.com",
+            "sameAs": [
+              "https://www.linkedin.com/in/codewithnaman",
+              "https://github.com/codewithnaman",
+              "https://twitter.com/codewithnaman"
+            ],
+            "description": "Engineering Manager at Mastercard with 11+ years in FinTech. Building scalable payment authentication systems with Java, Kafka, AWS. AI adopter and team multiplier.",
+            "knowsAbout": ["Java", "Spring Framework", "Kafka", "AWS", "AI", "Microservices", "Payment Authentication", "3DS", "System Design", "Engineering Leadership"]
+          }
+        ]
       }
     </script>
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="grid-bg"></div>
-    <slot />
+    <div id="main-content">
+      <slot />
+    </div>
     <script is:inline>
       const theme = localStorage.getItem('theme') ||
         (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -71,4 +105,20 @@ const canonicalUrl = Astro.url.pathname === '/index.html' ? 'https://codewithnam
 
 <style is:global>
   @import '../styles/global.css';
+  
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--accent-green);
+    color: #000;
+    padding: 0.5rem 1rem;
+    z-index: 9999;
+    font-weight: 600;
+    text-decoration: none;
+    transition: top 0.2s ease;
+  }
+  .skip-link:focus {
+    top: 0;
+  }
 </style>
