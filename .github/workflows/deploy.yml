@@ -32,7 +32,7 @@ jobs:
           echo "=== Dist contents ==="
           ls -la dist/
           echo "=== Sitemap ==="
-          head -5 dist/sitemap.xml
+          head -5 dist/sitemap-index.xml
           echo "=== Robots ==="
           cat dist/robots.txt
 
